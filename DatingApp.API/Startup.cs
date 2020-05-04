@@ -38,7 +38,7 @@ namespace DatingApp.API
         {
             services.AddDbContext<DataContext>(x => {
                   x.UseLazyLoadingProxies();
-                  x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                  x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
              });
             
             ConfigureServices(services);
@@ -89,16 +89,17 @@ namespace DatingApp.API
                         }
                     });
                 });
+                app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
             
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             //adding support for static files
 
