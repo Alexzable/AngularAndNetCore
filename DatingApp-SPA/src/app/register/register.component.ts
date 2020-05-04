@@ -2,8 +2,7 @@ import { Router } from '@angular/router';
 import { AlertifyService } from './../_services/alertify.service';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from '../_models/user';
 
 @Component({
@@ -15,7 +14,6 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   user: User;
   registerForm: FormGroup;
-  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(
     private authService: AuthService,
@@ -25,9 +23,6 @@ export class RegisterComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.bsConfig = {
-      containerClass: 'theme-red'
-    },
    this.createRegisterForm();
   }
 
